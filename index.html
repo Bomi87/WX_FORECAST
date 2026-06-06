@@ -58,7 +58,6 @@
   border-radius: 2px;
   display: none;
 }
-    
     .control-group {
       display: flex;
       flex-direction: column;
@@ -445,18 +444,9 @@ status.textContent =
         return "";
       }
 
-      if (key === "Cloud_cover_low(%)") {
-        const n = parseFloat(text);
-        if (n >= 80) return "caution";
-        return "";
-      }
+ 
 
-      if (key === "Precipitation_probability(%)") {
-        const n = parseFloat(text);
-        if (n >= 60) return "danger";
-        if (n >= 40) return "caution";
-        return "";
-      }
+
 
       if (key === "Precipitation(mm/hr)" || key === "Rain(mm/hr)") {
         const n = parseFloat(text);
