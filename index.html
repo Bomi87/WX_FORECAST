@@ -388,7 +388,7 @@ status.textContent =
       const display = forecast.display || {};
 
       const timeText = `${item.localDate} ${item.localTime}`;
-      const roundedText = `${forecast.roundedLocalDate || ""} ${forecast.roundedLocalTime || ""}`;
+
 
       const rows = WEATHER_ROWS.map(key => {
         const value = display[key] ?? "-";
@@ -410,10 +410,9 @@ status.textContent =
                 <div class="airport">${escapeHtml(item.airport)}</div>
                 <div class="type">${escapeHtml(type)}</div>
               </th>
-              <th>
-                <div>${escapeHtml(timeText)}</div>
-                <div class="rounded">Rounded: ${escapeHtml(roundedText)}</div>
-              </th>
+       <th>
+  <div>${escapeHtml(timeText)}</div>
+</th>
             </tr>
           </thead>
           <tbody>
