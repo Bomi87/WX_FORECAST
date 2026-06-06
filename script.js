@@ -1,4 +1,4 @@
-const GAS_URL = "https://script.google.com/macros/s/AKfycbx7o_tLvIskYeT2hag4yT0sdY2g8DTvHBoMCBNYXxZ3Xv5UA8Z9wroQhGAIGKXprXrpFw/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzuYk5F-LP1p0dSnlNmL2DqlF-PGjJ4CY6eWdwBv6mf4rbgT4pD-_ojfg2L_2yg9mOXGw/exec";
 
 const WEATHER_ROWS = [
   "Wind",
