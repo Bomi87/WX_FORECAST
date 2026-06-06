@@ -265,7 +265,23 @@
 </head>
 
 <body>
-  <div class="app">
+  <div id="authScreen" style="
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:#f4f7fb;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans KR',Arial,sans-serif;
+    color:#1f2937;
+    font-size:15px;
+    font-weight:700;
+  ">
+    승인 확인 중...
+  </div>
+
+  <div id="appRoot" style="display:none;">
+    <div class="app">
     <header class="top">
       <h1>Schedule Weather Analysis</h1>
       <p class="subtitle">Priority Order: ECMWF → GFS → ICON.</p>
@@ -289,10 +305,12 @@
     <section id="status" class="status">대기 중</section>
 
     <main id="result" class="result"></main>
+    </div>
   </div>
 
   <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbyoYMnGjh8cqXEDim_tp4dquW4L4tW-WsHii2PIzeIKBLPoZLDWqJdLZCPizPkBIlmN7A/exec";
+    let WEATHER_APP_STARTED = false;
 
     const WEATHER_ROWS = [
       "Wind",
@@ -307,12 +325,40 @@
       "Visibility(m)"
     ];
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("loadBtn").addEventListener("click", loadForecast);
- 
+function bindWeatherAppEvents() {
+  document.getElementById("loadBtn").addEventListener("click", loadForecast);
+}
 
-      loadForecast();
-    });
+function showAuthorizedApp() {
+  const authScreen = document.getElementById("authScreen");
+  const appRoot = document.getElementById("appRoot");
+
+  if (authScreen) authScreen.style.display = "none";
+  if (appRoot) appRoot.style.display = "block";
+}
+
+function startWeatherAppAfterAuth() {
+  if (WEATHER_APP_STARTED) return;
+
+  WEATHER_APP_STARTED = true;
+  showAuthorizedApp();
+  bindWeatherAppEvents();
+  loadForecast();
+}
+
+(function waitForPortalAuth() {
+  if (sessionStorage.getItem("portalApproved") === "true") {
+    startWeatherAppAfterAuth();
+  }
+
+  if (window.CURRENT_PORTAL_USER) {
+    sessionStorage.setItem("portalApproved", "true");
+    startWeatherAppAfterAuth();
+    return;
+  }
+
+  setTimeout(waitForPortalAuth, 200);
+})();
 
     async function loadForecast() {
       const aircraft = document.getElementById("aircraftSelect").value;
@@ -528,5 +574,8 @@ function formatLocalScheduleText(text) {
         .replaceAll("'", "&#039;");
     }
   </script>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://bomi87.github.io/SK-Aviation-portal/common-auth.js"></script>
 </body>
 </html>
