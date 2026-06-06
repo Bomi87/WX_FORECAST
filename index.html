@@ -198,7 +198,10 @@
       color: red;
       font-weight: bold;
     }
-
+.pink {
+  color: #ff1493;
+  font-weight: bold;
+}
     .error-box {
       padding: 12px;
       border: 1px solid #ff9999;
@@ -451,12 +454,18 @@
         return "";
       }
 
-      if (key === "Visibility(m)") {
-        const n = parseFloat(text);
-        if (n > 0 && n < 5000) return "danger";
-        if (n >= 5000 && n < 8000) return "caution";
-        return "";
-      }
+  if (key === "Visibility(m)") {
+  const n = parseFloat(text);
+
+  // 1000m 미만: 분홍색
+  if (n > 0 && n < 1000) return "pink";
+
+  // 기존 기준 유지
+  if (n >= 1000 && n < 5000) return "danger";
+  if (n >= 5000 && n < 8000) return "caution";
+
+  return "";
+}
 
       return "";
     }
