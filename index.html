@@ -281,7 +281,7 @@
   </label>
 
   <button id="loadBtn">조회</button>
-  <button id="refreshBtn">새로고침</button>
+
 
   <div id="cacheBadge" class="cache-badge">CACHED</div>
 </section>
@@ -309,7 +309,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("loadBtn").addEventListener("click", loadForecast);
-      document.getElementById("refreshBtn").addEventListener("click", loadForecast);
+ 
 
       loadForecast();
     });
