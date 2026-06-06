@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule Weather Analysis</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="app">
+    <header class="top">
+      <div>
+        <h1>Schedule Weather Analysis</h1>
+        <p class="subtitle">UTC 기준 스케줄별 DEP / ARR 기상분석</p>
+      </div>
+      <div class="warning">* 7일 이후 예보는 참고용</div>
+    </header>
+
+    <section class="controls">
+      <label class="control-group">
+        Aircraft
+        <select id="aircraftSelect">
+          <option value="ACJ">ACJ</option>
+          <option value="G650">G650</option>
+        </select>
+      </label>
+
+      <button id="loadBtn">조회</button>
+      <button id="refreshBtn">새로고침</button>
+    </section>
+
+    <section id="status" class="status">대기 중</section>
+
+    <main id="result" class="result"></main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
