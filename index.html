@@ -222,35 +222,45 @@
       color: #b00000;
     }
 
-    .empty-box {
-      padding: 12px;
-      border: 1px solid #ddd;
-      background: #fff;
-      color: #555;
-    }
+.empty-box {
+  padding: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+}
 
-    @media (max-width: 900px) {
-      .controls {
-        flex-wrap: wrap;
-      }
+.duration-line {
+  display: inline;
+}
 
-      .schedule-box {
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 900px) {
+  .controls {
+    flex-wrap: wrap;
+  }
 
-      .forecast-pair {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
+  .schedule-box {
+    grid-template-columns: 1fr;
+  }
 
-      .set-header {
-        display: block;
-      }
+  .forecast-pair {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 
-      .wx-table {
-        font-size: 13px;
-      }
-    }
+  .duration-line {
+    display: block;
+    margin-top: 2px;
+    margin-left: 44px;
+  }
+
+  .set-header {
+    display: block;
+  }
+
+  .wx-table {
+    font-size: 13px;
+  }
+}
   </style>
 </head>
 
@@ -368,10 +378,10 @@ status.textContent =
           </div>
 
           <div class="schedule-box">
-            <div>
-              <span class="label">Local</span>
-              ${escapeHtml(set.localScheduleText)}
-            </div>
+          <div>
+  <span class="label">Local</span>
+  ${formatLocalScheduleText(set.localScheduleText)}
+</div>
             <div>
               <span class="label">UTC</span>
               ${escapeHtml(set.utcScheduleText)}
