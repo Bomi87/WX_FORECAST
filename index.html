@@ -48,6 +48,17 @@
       border: 1px solid #ccc;
     }
 
+.cache-badge {
+  float: right;
+  background: #ffe600;
+  color: #111;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: 2px;
+  display: none;
+}
+    
     .control-group {
       display: flex;
       flex-direction: column;
@@ -248,18 +259,20 @@
       <p class="subtitle">Priority Order: ECMWF → GFS → ICON.</p>
     </header>
 
-    <section class="controls">
-      <label class="control-group">
-        Aircraft
-        <select id="aircraftSelect">
-          <option value="ACJ">ACJ</option>
-          <option value="G650">G650</option>
-        </select>
-      </label>
+<section class="controls">
+  <label class="control-group">
+    Aircraft
+    <select id="aircraftSelect">
+      <option value="ACJ">ACJ</option>
+      <option value="G650">G650</option>
+    </select>
+  </label>
 
-      <button id="loadBtn">조회</button>
-      <button id="refreshBtn">새로고침</button>
-    </section>
+  <button id="loadBtn">조회</button>
+  <button id="refreshBtn">새로고침</button>
+
+  <div id="cacheBadge" class="cache-badge">CACHED</div>
+</section>
 
     <section id="status" class="status">대기 중</section>
 
@@ -308,10 +321,18 @@
           throw new Error(data.message || "조회 실패");
         }
 
-        renderSets(data.sets || []);
+renderSets(data.sets || []);
 
-        status.textContent =
-          `${data.aircraft} / ${data.sets.length} SET 조회 완료 / Generated UTC ${data.generatedAtUtc}`;
+const cacheBadge = document.getElementById("cacheBadge");
+
+if (data.cached === true) {
+  cacheBadge.style.display = "block";
+} else {
+  cacheBadge.style.display = "none";
+}
+
+status.textContent =
+  `${data.aircraft} / ${data.sets.length} SET 조회 완료 / Generated UTC ${data.generatedAtUtc}`;
 
       } catch (err) {
         status.textContent = "오류 발생";
