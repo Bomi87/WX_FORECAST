@@ -378,7 +378,7 @@ status.textContent =
           </div>
 
           <div class="schedule-box">
-          <div>
+ <div>
   <span class="label">Local</span>
   ${formatLocalScheduleText(set.localScheduleText)}
 </div>
@@ -511,7 +511,14 @@ status.textContent =
         gust: Number(m[2] || 0)
       };
     }
+function formatLocalScheduleText(text) {
+  const safe = escapeHtml(text || "");
 
+  return safe.replace(
+    /\s*(\([^)]*소요\))$/,
+    `<span class="duration-line">$1</span>`
+  );
+}
     function escapeHtml(value) {
       return String(value ?? "")
         .replaceAll("&", "&amp;")
