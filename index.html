@@ -508,7 +508,7 @@ status.textContent =
 
       if (key === "Precipitation(mm/hr)" || key === "Rain(mm/hr)") {
         const n = parseFloat(text);
-        if (n >= 0.3) return "danger";
+        if (n >= 2) return "danger";
         if (n > 0) return "caution";
         return "";
       }
