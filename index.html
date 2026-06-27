@@ -347,12 +347,7 @@ function startWeatherAppAfterAuth() {
 }
 
 (function waitForPortalAuth() {
-  if (sessionStorage.getItem("portalApproved") === "true") {
-    startWeatherAppAfterAuth();
-  }
-
   if (window.CURRENT_PORTAL_USER) {
-    sessionStorage.setItem("portalApproved", "true");
     startWeatherAppAfterAuth();
     return;
   }
